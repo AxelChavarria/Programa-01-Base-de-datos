@@ -1,0 +1,81 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    margin: 0;
+    background-color:#d9f6f0
+}
+
+h1{
+    justify-content: center; 
+    align-items: center;
+    display: flex;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #113064 ;
+    color: white;
+}
+input {
+    border-radius: 20px;
+    border: 1px solid #c0c0c0;
+    outline: 0 !important;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+
+button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  display: block; 
+  margin: 0 auto;
+}
+
+button:hover {
+  letter-spacing: 3px;
+  background-color: #113064;
+  color: hsl(0, 0%, 100%);
+  box-shadow: #18428C 0px 7px 29px 0px;
+}
+
+button:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+a {
+    text-decoration: none;
+}
+
+form {
+    max-width: 300px;
+    display: block; 
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
