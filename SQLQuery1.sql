@@ -34,7 +34,7 @@ VALUES
 ('Adrian Vega', 405000.00),
 ('Natalia Silva', 315000.00),
 ('Hugo Marin', 250000.00),
-('Beatriz Nuñez', 480000.00),
+('Beatriz Nuï¿½ez', 480000.00),
 ('Sebastian Cordero', 370000.00),
 ('Monica Brenes', 335000.00),
 ('Julian Araya', 295000.00),
@@ -45,7 +45,7 @@ VALUES
 ('Karla Porras', 285000.00),
 ('Manuel Gamboa', 435000.00),
 ('Victoria Delgado', 325000.00),
-('Santiago Umaña', 265000.00),
+('Santiago Umaï¿½a', 265000.00),
 ('Patricia Fallas', 495000.00);
 GO
 
@@ -57,7 +57,7 @@ BEGIN
     -- Validamos si existe el empleado
     IF EXISTS (SELECT 1 FROM dbo.Empleado WHERE Nombre = @Nombre)
     BEGIN
-        -- Retornamos el error con código 0, que es, que ya existe el empleado
+        -- Retornamos el error con cï¿½digo 0, que es, que ya existe el empleado
         SELECT 0 AS Codigo, 'Nombre de Empleado ya existe.' AS Mensaje;
     END
 
@@ -68,11 +68,12 @@ BEGIN
         INSERT INTO dbo.Empleado (Nombre, Salario)
         VALUES (@Nombre, @Salario);
 
-        -- Retornamos 1 que es el código de inserción exitosa
-        SELECT 1 AS Codigo, 'Inserción exitosa' AS Mensaje;
+        -- Retornamos 1 que es el cï¿½digo de inserciï¿½n exitosa
+        SELECT 1 AS Codigo, 'Inserciï¿½n exitosa' AS Mensaje;
     END
 END
 
+1
 
 EXEC sp_InsertarEmpleadoValidado "Axel Chavarria", 3000;
 select * from dbo.Empleado

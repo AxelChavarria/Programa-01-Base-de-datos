@@ -1,44 +1,49 @@
+
+
+
 // llenado de tabla apenas carga la página
 document.addEventListener("DOMContentLoaded",() => {
     cargarDatos();
 });
 
 //carga los datos desde la base
-function cargarDatos() {
-    fetch("http:///dbo.Empleado") **Ruta de la base**
-        .then(res => res.json())
-        .then(data => {
-            let tabla = document.querySelector("#empleados tbody");
-            tabla.innerHTML = "";
+async function cargarDatos() {
 
-            data.forEach(usuario => {
-                let fila = `
-                    <tr>
-                        <td>${dbo.Empleado.id}</td>
-                        <td>${dbo.Empleado.nombre}</td>
-                        <td>${dbo.Empleado.salario}</td>
-                    </tr>
-                `;
-                tabla.innerHTML += fila;
-            });
-        })
-        .catch(error => console.error("Error:", error));
+
+    console.log("Intentando cargar datos...");
+    try {
+        const res = await fetch("http://localhost:3000/api/empleados");
+        const data = await res.json();
+        let tabla = document.querySelector("#empleados tbody");
+        tabla.innerHTML = "";
+
+        data.forEach(emp => {
+            tabla.innerHTML += `
+                <tr>
+                    <td>${emp.id}</td>
+                    <td>${emp.Nombre}</td>
+                    <td>${emp.Salario}</td>
+                </tr>`;
+        });
+    } catch (error) {
+        console.error("Error cargando tabla:", error);
+    }
 }
-
 
 
 //obtiene los datos del formulario
 function obtenerDatos() {
-
+    console.log("obtiene")
     return {
         nombre: document.getElementById("nombre").value.trim(),
-        edad: document.getElementById("edad").value.trim()
+        salario: document.getElementById("salario").value.trim()
     };
 }
 
 // Validación
-function validarDatos({ nombre, edad }) {
-    if (nombre === "" || edad === "") {
+function validarDatos({ nombre, salario }) {
+    console.log("valida")
+    if (nombre === "" || salario === "") {
         alert("Todos los campos son obligatorios");
         return false;
     }
@@ -74,28 +79,40 @@ function manejarError(error) {
     alert("Error al guardar");
 }
 
-// Enviar a la base
-function insertarEmpleado(datos) {
-    fetch("http:///dbo.Empleado", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(datos)
-    })
-    .then(res => res.json())
-    .then(respuesta => manejarRespuesta(respuesta))
-    .catch(error => manejarError(error));
+
+async function insertarEmpleado(datos) {
+    try {
+        const res = await fetch("http://localhost:3000/api/empleados", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        });
+        const respuesta = await res.json();
+
+        if (respuesta.Codigo === 1) {
+            alert("✅ " + respuesta.Mensaje);
+            cargarDatos(); // Refresca el Grid
+            document.getElementById("formulario").reset();
+        } else {
+            alert("❌ " + respuesta.Mensaje);
+        }
+    } catch (err) {
+        console.error("Error al insertar:", err);
+    }
 }
 
 
 const form = document.getElementById("formulario");
 
-form.addEventListener("submit", () -> {
-	alert("Funciona");
-	if(!validarDatos(obtenerDatos)) return;
-	insertarEmpleado;
+document.getElementById("formulario").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const salario = document.getElementById("salario").value.trim();
+    
+    // Aquí podrías llamar a tu función validarDatos({nombre, salario})
+    if(validarDatos({nombre,salario})){
+    await insertarEmpleado({ nombre, salario });
+}
 });
-
 
 
