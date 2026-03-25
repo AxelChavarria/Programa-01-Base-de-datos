@@ -15,7 +15,6 @@ async function cargarDatos() {
         const res = await fetch("http://localhost:3000/api/empleados");
         const data = await res.json();
         let tabla = document.querySelector("#empleados tbody");
-        tabla.innerHTML = "";
 
         data.forEach(emp => {
             tabla.innerHTML += `
