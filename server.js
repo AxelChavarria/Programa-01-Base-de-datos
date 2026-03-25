@@ -21,7 +21,7 @@ const config = {
 app.get('/api/empleados', async (req, res) => {
     try {
         let pool = await sql.connect(config);
-        let result = await pool.request().query('SELECT id, Nombre, Salario FROM dbo.Empleado ORDER BY Salario DESC');
+        let result = await pool.request().execute('sp_ListarEmpleados')
         res.json(result.recordset);
     } catch (err) {
         res.status(500).json({ error: err.message });

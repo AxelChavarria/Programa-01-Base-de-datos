@@ -93,7 +93,17 @@ BEGIN
     END
 END
 
-1
+
+CREATE PROCEDURE sp_ListarEmpleados
+AS
+BEGIN
+    
+    SELECT 
+        id, 
+        Nombre, 
+        Salario 
+    FROM dbo.Empleado;
+    ORDER BY Nombre ASC
+END
 
 EXEC sp_InsertarEmpleadoValidado "Axel Chavarria", 3000;
-select * from dbo.Empleado
