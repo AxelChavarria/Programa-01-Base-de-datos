@@ -89,11 +89,11 @@ async function insertarEmpleado(datos) {
         const respuesta = await res.json();
 
         if (respuesta.Codigo === 1) {
-            alert("✅ " + respuesta.Mensaje);
+            alert(respuesta.Mensaje);
             cargarDatos(); // Refresca el Grid
             document.getElementById("formulario").reset();
         } else {
-            alert("❌ " + respuesta.Mensaje);
+            alert(respuesta.Mensaje);
         }
     } catch (err) {
         console.error("Error al insertar:", err);

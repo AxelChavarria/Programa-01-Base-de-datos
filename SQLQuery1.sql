@@ -73,6 +73,26 @@ BEGIN
     END
 END
 
+
+ALTER PROCEDURE sp_InsertarEmpleadoValidado
+    @inNombre VARCHAR(128),
+    @inSalario MONEY
+AS
+BEGIN
+ IF EXISTS (SELECT 1 FROM dbo.Empleado WHERE Nombre = @inNombre)
+    BEGIN
+        SELECT 0 AS Codigo, 'Nombre de Empleado ya existe.' AS Mensaje;
+    END
+    ELSE
+    BEGIN
+        
+        INSERT INTO dbo.Empleado (Nombre, Salario)
+        VALUES (@inNombre, @inSalario);
+
+        SELECT 1 AS Codigo, 'Inserción exitosa' AS Mensaje;
+    END
+END
+
 1
 
 EXEC sp_InsertarEmpleadoValidado "Axel Chavarria", 3000;

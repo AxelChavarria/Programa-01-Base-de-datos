@@ -34,8 +34,8 @@ app.post('/api/empleados', async (req, res) => {
         const { nombre, salario } = req.body;
         let pool = await sql.connect(config);
         let result = await pool.request()
-            .input('Nombre', sql.VarChar, nombre)
-            .input('Salario', sql.Money, salario)
+            .input('inNombre', sql.VarChar, nombre)
+            .input('inSalario', sql.Money, salario)
             .execute('sp_InsertarEmpleadoValidado');
 
         res.json(result.recordset[0]); // Devuelve { Codigo, Mensaje }
